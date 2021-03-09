@@ -1,5 +1,7 @@
 package CSCI4210;
 
+import java.io.*;
+
 public class TeamMembers {
 
 	public String firstName;
@@ -7,14 +9,32 @@ public class TeamMembers {
 	public double weight;
 
 	public TeamMembers(String firstName,String lastName,double weight) {
-		//while(isWeight(weight) == true) {
-		isWeight(weight);
-		isName(firstName);
-		isName(lastName);
+		if(isWeight(weight)){
+			
+			if(checkDouble(weight)) {
+				
+				this.weight = weight;
+			}else {
+				throw new OutOfRangeException();
+			}
+			
+		}else {			
+			throw new NonDoubleArgumentException();
+		}		
+		try {
+			isName(firstName);
+			this.firstName = firstName;
+		} catch (Exception e1) {
+			
+			e1.printStackTrace();
+		}
+		try {
+			isName(lastName);
+			this.lastName = lastName;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.weight=weight;
 	}
 
 	/**
@@ -22,29 +42,13 @@ public class TeamMembers {
 	 */
 	public String getFirstName() {
 		return firstName;
-	}
-
-	/**
-	 * @param firstName the first name to set
-	 */
-	public void setFirstName(String name) {
-		this.firstName = name;
-	}
+	}	
 	/**
 	 * @return the last name
 	 */
 	public String getLastName() {
 		return lastName;
-	}
-
-	/**
-	 * @param lastName the last name to set
-	 */
-	public void setName(String name) {
-		this.lastName = name;
-	}
-
-
+	}	
 	/**
 	 * @return the weight
 	 */
@@ -58,8 +62,6 @@ public class TeamMembers {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-
-
 	/* this is suppose to be a check for when the user enters a number thats not a decmial.
 	 * Needs to throw an Expection, Should revisit!
 	 * public double checkDouble(double weight) { if(weight>1||weight<=0) {
@@ -67,37 +69,51 @@ public class TeamMembers {
 	 * } }
 	 */
 
-	public double checkDouble(double weight) {
-		if( weight > 1 || weight <= 0 ) {
-			throw new OutOfRangeException();
+	public boolean checkDouble(double weight) {
+		//assume the weight passed is in range [0, 1) 
+		boolean inRange;
+		// return false if weight is not between [0 , 1)
+		if( weight < 1.0 && weight >= 0.0 ) {
+			inRange = true;
+		}else {
+			inRange = false;
+			//throw new OutOfRangeException();
 		}
-
-		return weight;
+		return inRange;
 	}
 
 
-	public boolean isWeight(double weight) {
-		//checking if the value is of type double
-		boolean isValid;
-		//using wrapper class to check if type is a double
-		Double d = Double.valueOf(weight);
-
-		if(d instanceof Double) {
-			isValid = true;
-		}else {
+	public boolean isWeight(Object weight) {
+		
+		//cast the input of the user		
+		String value = String.valueOf(weight);
+		
+		boolean isValid = true;
+		try {
+			
+			Double d = Double.valueOf(value);
+			if(d < 0) {				
+				isValid = false;
+			}
+							
+		}catch(NumberFormatException e) {
 			isValid = false;
-			throw new NonDoubleArgumentException();
+			
+			e.printStackTrace();
+			
 		}
-
+		
 		// return the outcome
 		return isValid;
 
 	}
 
+
 	public boolean isName(String name) throws Exception {
 		//returns true if both first and last name are letters only
 		boolean isValidName = true;
-
+		
+		try {
 		//looping each character in name
 			for (int i = 0; i <name.length(); i++) {
 				if(Character.isLetter(name.charAt(i))) {
@@ -109,8 +125,12 @@ public class TeamMembers {
 					isValidName = false;
 					throw new Exception();
 				}
-
+				
 			}
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 			return isValidName;		
 	}
 }

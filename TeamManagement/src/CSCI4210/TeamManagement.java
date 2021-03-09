@@ -13,11 +13,15 @@ import java.util.*;
 		 int numofMembers = input.nextInt();
 		 
 		 for(int i=0;i<numofMembers;i++) { // this entire for loop can be made into a method but for now im leaving it as is
-			 System.out.println("Enter name of Member Followed by a weight");
-			 String name = input.next();
-	
+			 System.out.println("Enter name of Member");
+			 String firstName = input.next();
+			 
+			 System.out.println("Enter last name Member");
+			 String lastName = input.next();
+			 
+			 System.out.println("Enter the weight of the member");
 			 double weight = input.nextDouble();
-			 firstTeam.members.add(new TeamMembers(name,weight));
+			 firstTeam.members.add(new TeamMembers(firstName,lastName,weight));
 		 }
 		 System.out.println("Enter Resource name followed by amount of it");
 		 String rName = input.next();
@@ -33,7 +37,7 @@ import java.util.*;
 		 for(int i=0;i<team.members.size();i++) {
 			 double allocation = team.members.get(i).weight*r.numericalVal;
 			 totalAlloc += team.members.get(i).weight;
-			 System.out.println("Member: "+ team.members.get(i).name + " has the weight of: " +team.members.get(i).weight + " The Allocation for Resource " + r.name +" is: " +allocation );
+			 System.out.println("Member: "+ team.members.get(i).getFullName() + " has the weight of: " +team.members.get(i).weight + " The Allocation for Resource " + r.name +" is: " +allocation );
 		 }
 		 if(totalAlloc != 1.0) {
 			 double remaning = (1-totalAlloc)*r.numericalVal;
