@@ -21,7 +21,7 @@ import java.util.*;
 			 
 			 System.out.println("Enter the weight of the member");
 			 double weight = input.nextDouble();
-			 firstTeam.members.add(new TeamMembers(firstName,lastName,weight));
+			 firstTeam.addMember(new TeamMembers(firstName,lastName,weight));
 		 }
 		 System.out.println("Enter Resource name followed by amount of it");
 		 String rName = input.next();
@@ -33,14 +33,15 @@ import java.util.*;
 	 }
 	 
 	 public static void printAllocation(Resources r,Teams team) {
+		 
 		 double totalAlloc = 0.0;
-		 for(int i=0;i<team.members.size();i++) {
-			 double allocation = team.members.get(i).weight*r.numericalVal;
-			 totalAlloc += team.members.get(i).weight;
-			 System.out.println("Member: "+ team.members.get(i).getFullName() + " has the weight of: " +team.members.get(i).weight + " The Allocation for Resource " + r.name +" is: " +allocation );
+		 for(int i = 0; i < team.getTeamSize(); i++) {
+			 double allocation = team.getMember(i).getWeight() * r.getNumericalVal();
+			 totalAlloc += team.getMember(i).getWeight();
+			 System.out.println("Member: "+ team.getMember(i).getFullName() + " has the weight of: " +team.getMember(i).getWeight() + " The Allocation for Resource " + r.getName() +" is: " +allocation );
 		 }
 		 if(totalAlloc != 1.0) {
-			 double remaning = (1-totalAlloc)*r.numericalVal;
+			 double remaning = (1-totalAlloc)*r.getNumericalVal();
 			 System.out.printf("There is still %.2f remaning",remaning );
 		 }
 	 }

@@ -10,6 +10,12 @@ public class Teams {
 		this.members = new ArrayList<>();	
 		}
 	/**
+	 * @param newMember adding new member to the arrayList
+	 */
+	public void addMember(TeamMembers newMember) {
+		members.add(newMember);
+	}
+	/**
 	 * @return the name
 	 */
 	public String getName() {
@@ -33,8 +39,24 @@ public class Teams {
 	public void setMembers(ArrayList<TeamMembers> members) {
 		this.members = members;
 	}
-	
-	
-	
+	/**
+	 * @return team member in the list at specified index
+	 */
+	public TeamMembers getMember(int index) {
+		
+		TeamMembers member = null;
+		//getting the team member at index		
+		member = members.get(index);
+		//return team member
+		return member;
+	}	
+	/**
+	 * @return the size of the team
+	 */
+	public int getTeamSize() {
+		
+		return members.size();		
+		
+	}		
 	
 }

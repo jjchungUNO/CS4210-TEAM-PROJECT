@@ -7,6 +7,7 @@ public class TeamMembers {
 	public String firstName;
 	public String lastName;
 	public double weight;
+	public static double totalTeamWeight;
 
 	public TeamMembers(String firstName,String lastName,double weight) {
 		if(isWeight(weight)){
@@ -14,6 +15,7 @@ public class TeamMembers {
 			if(checkDouble(weight)) {
 				
 				this.weight = weight;
+				//add team member weight to the total 
 			}else {
 				throw new OutOfRangeException();
 			}
@@ -107,6 +109,12 @@ public class TeamMembers {
 		return isValid;
 
 	}
+	
+public String getFullName() {
+		
+		return getFirstName() + " " + getLastName();
+	}
+
 
 
 	public boolean isName(String name) throws Exception {
