@@ -38,6 +38,12 @@ class Resources {
 	public void decreaseNumericalVal(double decrementValue) {
 		numericalVal = numericalVal - decrementValue;
 	}
+	/**
+	 * @return teamSize divide remaining resource by team size
+	 */
+	public double distributeResourcesEvenly(int teamSize) {
+		numericalVal = numericalVal / teamSize;
+		return numericalVal;
+	}	
 
 }
-
