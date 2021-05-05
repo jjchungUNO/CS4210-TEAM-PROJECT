@@ -28,6 +28,9 @@ public class Teams {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public void removeMember(int index) {
+		this.members.remove(index);
+	}
 	/**
 	 * @return the ArrayList of team members
 	 */
