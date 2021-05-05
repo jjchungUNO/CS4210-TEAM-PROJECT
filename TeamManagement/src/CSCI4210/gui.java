@@ -79,6 +79,10 @@ public class gui {
 			}
 		});
 	}
+	
+	/*
+	 * Helps us find the Index of a given String in a table
+	 */
 	private int findIndex(String selectedIndex,DefaultTableModel model) {
 		int rowCount = model.getRowCount();
 		int colCount = model.getColumnCount();
@@ -132,17 +136,12 @@ public class gui {
 		JButton TeamButton = new JButton("Add Team");
 		
 		
-		/*
-		 * 
-		 * THIS ONLY APPEARS ONLY AFTER THE USER INPUTS THE FIRST TEAM. 
-		 * THE IDEA IS THAT THE USER CAN PICK WHICH TEAM TO EDIT OR RUN CALCUATIONS ON
-		 * THAT INFORMATION WILL THEN BE DISPLAYED WITH A JTABLE
-		 * 
-		 * 
-		 */
 		
 		/*
-		 * Logic for the table 
+		 * Logic for the Team table
+		 * 
+		 *  
+		 *  
 		 */
 		JTable teamName_1 = new JTable(new DefaultTableModel(new String[] {"TeamName","First Name","Last Name","Weight"},10)) {
 			@Override
@@ -216,10 +215,15 @@ public class gui {
 		JButton RemoveMemberButton = new JButton("Remove Member");
 		RemoveMemberButton.setBackground(new Color(0, 102, 255));
 		RemoveMemberButton.setForeground(Color.WHITE);
+		RemoveMemberButton.setVisible(false);
 		
 		
 		/*IGNORE ALL OF THIS
 		 * THIS IS ECLIPSE GROUP LAYOUT STUFF
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		GroupLayout groupLayout = new GroupLayout(frmTeamResourceManager.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -302,6 +306,9 @@ public class gui {
 		);
 		/*
 		 * THE LAYOUT STUFF ENDS HERE
+		 * 
+		 * 
+		 * 
 		 */
 		
 		JTable ResourceTable = new JTable(new DefaultTableModel(new String[] {"Resource","Resouce Remaining","Total Resource used"},10)) {
@@ -318,6 +325,11 @@ public class gui {
 		
 		/*
 		 * Update Resource Button LOGIC: 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		UpdateResourceButton.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) { 
@@ -353,6 +365,10 @@ public class gui {
 	
 		/*
 		 * Cacluate button logic goes here
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Cacluate.setForeground(Color.WHITE);
@@ -409,7 +425,14 @@ public class gui {
 		});
 		
 	
-		
+		/*
+		 * LOGIC FOR ADD RESOURCE BUTTON
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		AddResource.setBackground(new Color(0, 102, 255));
 		AddResource.setForeground(Color.WHITE);
 		
@@ -448,6 +471,12 @@ public class gui {
 			}
 			/*
 			 * A built in method to check if the string entered is a number
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
 			 */
 			private boolean onlyDigits(String text) {
 				for(int i=0;i<text.length();i++) {
@@ -463,6 +492,11 @@ public class gui {
 		
 		/*
 		 * LOGIC FOR ADD MEMBER BUTTON GOES HERE
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		AddMember.setBackground(new Color(0, 102, 255));
 		AddMember.setForeground(Color.WHITE);
@@ -502,6 +536,7 @@ public class gui {
 					model.setValueAt(firstName.getText(), index,1);
 					model.setValueAt(lastName.getText(), index,2);
 					model.setValueAt(convertToDouble, index,3);
+					RemoveMemberButton.setVisible(true);
 					index++;
 				}
 			}
@@ -512,6 +547,11 @@ public class gui {
 		
 		/*
 		 * This is the add Team Button logic
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		TeamButton.setForeground(Color.WHITE);
@@ -564,7 +604,11 @@ public class gui {
 				
 		});
 		
-		
+		/*
+		 * 
+		 * Reset Used Resource LOGIC
+		 * 
+		 */
 		ResetUsedResourcesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(manager.teamResources.size()==-1) {
@@ -579,7 +623,11 @@ public class gui {
 			}
 		});
 		
-		
+		/*
+		 * 
+		 * Delete Resource Button
+		 * 
+		 */
 		DeleteResourceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int resourceIndex = ResourceComboBox.getSelectedIndex();
@@ -593,6 +641,13 @@ public class gui {
 			}
 		});
 		
+		
+		
+		/*
+		 * 
+		 * Remove Member BUtton
+		 * 
+		 */
 		RemoveMemberButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(lblNewLabel, manager.team.get(TeamcomboBox.getSelectedIndex()).members.size());
@@ -628,16 +683,14 @@ public class gui {
 		
 
 		
-		/*
-		 * Add Resource Button Logic Goes here
-		 */
+		
 	
 		frmTeamResourceManager.getContentPane().setLayout(groupLayout);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmTeamResourceManager.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("File");
+		JMenu mnNewMenu = new JMenu("File"); //Displays File on top of our window
 		menuBar.add(mnNewMenu);
 		
 		
@@ -673,11 +726,11 @@ public class gui {
 			}
 		});
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Print");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Print"); //adds print under file
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) { 
-				MessageFormat test = new MessageFormat("test");
+				
 				try {
 					teamName_1.print();
 				}
