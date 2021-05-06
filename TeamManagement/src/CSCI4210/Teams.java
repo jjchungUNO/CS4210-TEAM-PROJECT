@@ -28,9 +28,12 @@ public class Teams {
 	public void setName(String name) {
 		this.name = name;
 	}
+<<<<<<< HEAD
 	public void removeMember(int index) {
 		this.members.remove(index);
 	}
+=======
+>>>>>>> main
 	/**
 	 * @return the ArrayList of team members
 	 */
@@ -63,8 +66,11 @@ public class Teams {
 		
 	}		
 	
+<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return this.getName();
 	}
+=======
+>>>>>>> main
 }
