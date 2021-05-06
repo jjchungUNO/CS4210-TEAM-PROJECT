@@ -55,7 +55,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollBar;
 
-public class gui {
+public class GUI{
 
 	private JFrame frmTeamResourceManager;
 	public TeamManagementRunner manager;
