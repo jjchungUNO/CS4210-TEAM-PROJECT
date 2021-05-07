@@ -643,7 +643,7 @@ public class gui{
 		 */
 		RemoveMemberButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(lblNewLabel, manager.team.get(TeamcomboBox.getSelectedIndex()).members.size());
+				
 				if(manager.team.get(TeamcomboBox.getSelectedIndex()).members.size()==0) {
 					JOptionPane.showMessageDialog(lblNewLabel, "There are no Memebers to remove");
 				}
